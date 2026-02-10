@@ -1,0 +1,128 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { label: 'Services', href: '/services' },
+  { label: 'Deliverables', href: '/deliverables' },
+  { label: 'Industries', href: '/industries' },
+  { label: 'About', href: '/about' },
+];
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-vp-bg/80 backdrop-blur-xl"
+>
+  <div class="section-container">
+    <nav class="flex items-center justify-between h-16 md:h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="relative">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            class="text-amber-500"
+          >
+            <path
+              d="M6 24L16 8l10 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+            <circle cx="16" cy="12" r="2" fill="currentColor"></circle>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span
+            class="text-white font-black text-lg uppercase tracking-widest leading-none"
+          >
+            Vantage Point
+          </span>
+          <span
+            class="text-amber-500 text-[10px] uppercase tracking-[0.3em] font-semibold leading-none mt-0.5"
+          >
+            Aerial Data
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-8">
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                'text-sm uppercase tracking-widest font-medium transition-colors duration-200',
+                currentPath === link.href || currentPath === link.href + '/'
+                  ? 'text-amber-500'
+                  : 'text-zinc-400 hover:text-white',
+              ]}
+            >
+              {link.label}
+            </a>
+          ))
+        }
+        <a href="/contact" class="btn-primary text-xs px-6 py-3">
+          Get a Quote
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden text-zinc-400 hover:text-white p-2"
+        aria-label="Toggle menu"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <line x1="3" y1="6" x2="21" y2="6" class="menu-line"></line>
+          <line x1="3" y1="12" x2="21" y2="12" class="menu-line"></line>
+          <line x1="3" y1="18" x2="21" y2="18" class="menu-line"></line>
+        </svg>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden border-t border-zinc-800 bg-vp-bg/95 backdrop-blur-xl"
+  >
+    <div class="section-container py-6 flex flex-col gap-4">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              'text-sm uppercase tracking-widest font-medium py-2',
+              currentPath === link.href || currentPath === link.href + '/'
+                ? 'text-amber-500'
+                : 'text-zinc-400',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a href="/contact" class="btn-primary text-xs px-6 py-3 mt-2 text-center">
+        Get a Quote
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>

@@ -1,0 +1,599 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'Deliverables | Vantage Point';
+const description = 'Explore sample deliverables from Vantage Point drone aerial data services—orthomosaics, 3D point clouds, progress monitoring, and detailed reports.';
+---
+
+<Layout {title} {description}>
+  <style>
+    @keyframes subtle-grid {
+      0% { background-position: 0 0; }
+      100% { background-position: 50px 50px; }
+    }
+
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .grid-overlay {
+      background-image:
+        linear-gradient(rgba(251, 146, 60, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(251, 146, 60, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    .gallery-placeholder {
+      background: linear-gradient(135deg, #27272a 0%, #1f1f23 100%);
+      border: 2px dashed rgba(251, 146, 60, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-placeholder::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(251, 146, 60, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .gallery-placeholder:hover {
+      border-color: rgba(251, 146, 60, 0.7);
+      box-shadow: 0 0 20px rgba(251, 146, 60, 0.15);
+    }
+
+    .gallery-placeholder:hover::before {
+      left: 100%;
+    }
+
+    .placeholder-content {
+      position: relative;
+      z-index: 10;
+      flex flex-col items-center justify-center h-full;
+    }
+
+    .placeholder-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(251, 146, 60, 0.8);
+      margin-bottom: 0.5rem;
+    }
+
+    .placeholder-sublabel {
+      font-size: 0.75rem;
+      color: rgba(161, 161, 170, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .timeline-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      color: rgba(251, 146, 60, 0.5);
+      font-size: 1.5rem;
+    }
+
+    .fade-in-animation {
+      animation: fade-in-up 0.6s ease-out;
+    }
+
+    .card-animation {
+      animation: fade-in-up 0.6s ease-out;
+    }
+
+    .gallery-grid {
+      display: grid;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .section-header {
+      border-left: 4px solid rgb(251, 146, 60);
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .format-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+
+    .format-card {
+      background: rgba(251, 146, 60, 0.05);
+      border: 1px solid rgba(251, 146, 60, 0.2);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .format-card:hover {
+      background: rgba(251, 146, 60, 0.1);
+      border-color: rgba(251, 146, 60, 0.5);
+      transform: translateY(-4px);
+    }
+
+    .format-extension {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: rgb(251, 146, 60);
+      margin-bottom: 0.5rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    .format-description {
+      font-size: 0.75rem;
+      color: rgb(161, 161, 170);
+      line-height: 1.4;
+    }
+
+    .formats-badge {
+      display: inline-flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .format-tag {
+      display: inline-block;
+      background: rgba(251, 146, 60, 0.1);
+      color: rgb(251, 146, 60);
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 1px solid rgba(251, 146, 60, 0.2);
+    }
+  </style>
+
+  <!-- Hero Section -->
+  <section class="relative py-32 pt-40 bg-vp-bg grid-overlay overflow-hidden">
+    <div class="section-container relative z-10 fade-in-animation">
+      <div class="mb-6">
+        <p class="text-amber-500 uppercase tracking-widest text-sm font-semibold">
+          Deliverables
+        </p>
+      </div>
+      <h1 class="heading-display mb-6 max-w-3xl">
+        See What We Deliver
+      </h1>
+      <p class="text-zinc-300 text-lg max-w-2xl">
+        From raw flight data to actionable intelligence — browse sample deliverables across all our output types.
+      </p>
+    </div>
+  </section>
+
+  <!-- Orthomosaics Section -->
+  <section class="py-24 bg-vp-bg">
+    <div class="section-container">
+      <div class="section-header card-animation" style="animation-delay: 0.1s;">
+        <h2 class="heading-section mb-3">Orthomosaics</h2>
+        <p class="text-zinc-400">
+          Georeferenced aerial maps stitched from overlapping images with sub-centimeter GSD (Ground Sample Distance). Perfect for site planning, progress tracking, and volumetric analysis.
+        </p>
+      </div>
+
+      <div class="gallery-grid card-animation" style="animation-delay: 0.2s;">
+        <!-- Sample 1 -->
+        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
+          <div class="placeholder-content text-center">
+            <p class="placeholder-label">Orthomosaic Sample</p>
+            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+            </svg>
+            <p class="placeholder-sublabel">Georeferenced Map</p>
+          </div>
+        </div>
+
+        <!-- Sample 2 -->
+        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
+          <div class="placeholder-content text-center">
+            <p class="placeholder-label">Orthomosaic Sample</p>
+            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+            </svg>
+            <p class="placeholder-sublabel">Composite View</p>
+          </div>
+        </div>
+
+        <!-- Sample 3 -->
+        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
+          <div class="placeholder-content text-center">
+            <p class="placeholder-label">Orthomosaic Sample</p>
+            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+            </svg>
+            <p class="placeholder-sublabel">Site Overview</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Captions -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+        <div class="card-animation" style="animation-delay: 0.25s;">
+          <p class="text-zinc-300 font-semibold mb-2">Construction Site</p>
+          <p class="text-zinc-500 text-sm">50-acre commercial development, ±2cm accuracy</p>
+        </div>
+        <div class="card-animation" style="animation-delay: 0.3s;">
+          <p class="text-zinc-300 font-semibold mb-2">Solar Installation</p>
+          <p class="text-zinc-500 text-sm">Roof analysis with multispectral data overlay</p>
+        </div>
+        <div class="card-animation" style="animation-delay: 0.35s;">
+          <p class="text-zinc-300 font-semibold mb-2">Agricultural Land</p>
+          <p class="text-zinc-500 text-sm">Precision crop monitoring across 120-acre parcel</p>
+        </div>
+      </div>
+
+      <!-- Formats -->
+      <div class="mt-12 card-animation" style="animation-delay: 0.4s;">
+        <p class="text-zinc-400 text-sm uppercase tracking-widest font-semibold mb-4">Available Formats</p>
+        <div class="formats-badge">
+          <span class="format-tag">GeoTIFF</span>
+          <span class="format-tag">JPEG</span>
+          <span class="format-tag">PDF</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D Point Clouds Section -->
+  <section class="py-24 bg-vp-surface">
+    <div class="section-container">
+      <div class="section-header card-animation" style="animation-delay: 0.1s;">
+        <h2 class="heading-section mb-3">3D Point Clouds</h2>
+        <p class="text-zinc-400">
+          Dense 3D models with millions of points and survey-grade accuracy (±2cm). Ideal for volumetric calculations, design verification, and creating digital twins of your site.
+        </p>
+      </div>
+
+      <div class="gallery-grid card-animation" style="animation-delay: 0.2s;">
+        <!-- Sample 1 -->
+        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
+          <div class="placeholder-content text-center">
+            <p class="placeholder-label">Point Cloud Sample</p>
+            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <p class="placeholder-sublabel">3D Model View</p>
+          </div>
+        </div>
+
+        <!-- Sample 2 -->
+        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
+          <div class="placeholder-content text-center">
+            <p class="placeholder-label">Point Cloud Sample</p>
+            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <p class="placeholder-sublabel">Colorized Cloud</p>
+          </div>
+        </div>
+
+        <!-- Sample 3 -->
+        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
+          <div class="placeholder-content text-center">
+            <p class="placeholder-label">Point Cloud Sample</p>
+            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <p class="placeholder-sublabel">Mesh Surface</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Captions -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+        <div class="card-animation" style="animation-delay: 0.25s;">
+          <p class="text-zinc-300 font-semibold mb-2">Quarry Stockpile</p>
+          <p class="text-zinc-500 text-sm">12 million points, volumetric analysis included</p>
+        </div>
+        <div class="card-animation" style="animation-delay: 0.3s;">
+          <p class="text-zinc-300 font-semibold mb-2">Rooftop Survey</p>
+          <p class="text-zinc-500 text-sm">Colorized point cloud with RGB from imagery</p>
+        </div>
+        <div class="card-animation" style="animation-delay: 0.35s;">
+          <p class="text-zinc-300 font-semibold mb-2">Mine Pit Analysis</p>
+          <p class="text-zinc-500 text-sm">18 million points for precise volume calculation</p>
+        </div>
+      </div>
+
+      <!-- Formats -->
+      <div class="mt-12 card-animation" style="animation-delay: 0.4s;">
+        <p class="text-zinc-400 text-sm uppercase tracking-widest font-semibold mb-4">Available Formats</p>
+        <div class="formats-badge">
+          <span class="format-tag">LAS</span>
+          <span class="format-tag">LAZ</span>
+          <span class="format-tag">XYZ</span>
+          <span class="format-tag">OBJ</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progress Monitoring Section -->
+  <section class="py-24 bg-vp-bg">
+    <div class="section-container">
+      <div class="section-header card-animation" style="animation-delay: 0.1s;">
+        <h2 class="heading-section mb-3">Progress Monitoring</h2>
+        <p class="text-zinc-400">
+          Scheduled time-series data captures track changes over weeks and months. Compare datasets, verify completion milestones, and maintain visual evidence of project advancement.
+        </p>
+      </div>
+
+      <!-- Timeline-style gallery -->
+      <div class="card-animation flex flex-col md:flex-row items-center gap-6 mt-8" style="animation-delay: 0.2s;">
+        <!-- Week 1 -->
+        <div class="flex-1">
+          <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
+            <div class="placeholder-content text-center">
+              <p class="placeholder-label">Week 1</p>
+              <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+              </svg>
+              <p class="placeholder-sublabel">Initial Baseline</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow 1 -->
+        <div class="timeline-arrow">→</div>
+
+        <!-- Week 4 -->
+        <div class="flex-1">
+          <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
+            <div class="placeholder-content text-center">
+              <p class="placeholder-label">Week 4</p>
+              <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+              </svg>
+              <p class="placeholder-sublabel">Mid-Project Check</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow 2 -->
+        <div class="timeline-arrow">→</div>
+
+        <!-- Week 8 -->
+        <div class="flex-1">
+          <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
+            <div class="placeholder-content text-center">
+              <p class="placeholder-label">Week 8</p>
+              <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+              </svg>
+              <p class="placeholder-sublabel">Final Status</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Caption -->
+      <div class="mt-8 card-animation" style="animation-delay: 0.3s;">
+        <p class="text-zinc-300 font-semibold mb-2">Commercial Building Construction</p>
+        <p class="text-zinc-500 text-sm">12-week progress monitoring with bi-weekly captures and change detection analysis</p>
+      </div>
+
+      <!-- Formats -->
+      <div class="mt-12 card-animation" style="animation-delay: 0.4s;">
+        <p class="text-zinc-400 text-sm uppercase tracking-widest font-semibold mb-4">Available Formats</p>
+        <div class="formats-badge">
+          <span class="format-tag">PDF Report</span>
+          <span class="format-tag">GeoTIFF</span>
+          <span class="format-tag">Video (MP4)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reports & Analytics Section -->
+  <section class="py-24 bg-vp-surface">
+    <div class="section-container">
+      <div class="section-header card-animation" style="animation-delay: 0.1s;">
+        <h2 class="heading-section mb-3">Reports & Analytics</h2>
+        <p class="text-zinc-400">
+          Comprehensive annotated reports with measurement annotations, volumetric calculations, thermal analysis, and vegetation indices (NDVI). Tailored for your specific project needs.
+        </p>
+      </div>
+
+      <div class="gallery-grid card-animation" style="animation-delay: 0.2s;">
+        <!-- Report 1 -->
+        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
+          <div class="placeholder-content text-center">
+            <p class="placeholder-label">Report Sample</p>
+            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+            </svg>
+            <p class="placeholder-sublabel">Volume Analysis</p>
+          </div>
+        </div>
+
+        <!-- Report 2 -->
+        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
+          <div class="placeholder-content text-center">
+            <p class="placeholder-label">Report Sample</p>
+            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+            </svg>
+            <p class="placeholder-sublabel">Thermal Analysis</p>
+          </div>
+        </div>
+
+        <!-- Report 3 -->
+        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
+          <div class="placeholder-content text-center">
+            <p class="placeholder-label">Report Sample</p>
+            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+            </svg>
+            <p class="placeholder-sublabel">NDVI Mapping</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Report Features -->
+      <div class="mt-12 grid md:grid-cols-4 gap-6 card-animation" style="animation-delay: 0.3s;">
+        <div class="bg-vp-bg p-4 rounded-lg border border-zinc-800">
+          <p class="text-amber-500 font-semibold mb-2">📐 Annotations</p>
+          <p class="text-zinc-500 text-sm">Measurement overlays and distance calculations</p>
+        </div>
+        <div class="bg-vp-bg p-4 rounded-lg border border-zinc-800">
+          <p class="text-amber-500 font-semibold mb-2">📊 Volumes</p>
+          <p class="text-zinc-500 text-sm">Precise cubic yard and ton calculations</p>
+        </div>
+        <div class="bg-vp-bg p-4 rounded-lg border border-zinc-800">
+          <p class="text-amber-500 font-semibold mb-2">🌱 NDVI Maps</p>
+          <p class="text-zinc-500 text-sm">Vegetation health and crop vigor analysis</p>
+        </div>
+        <div class="bg-vp-bg p-4 rounded-lg border border-zinc-800">
+          <p class="text-amber-500 font-semibold mb-2">🔥 Thermal</p>
+          <p class="text-zinc-500 text-sm">Temperature mapping and anomaly detection</p>
+        </div>
+      </div>
+
+      <!-- Formats -->
+      <div class="mt-12 card-animation" style="animation-delay: 0.4s;">
+        <p class="text-zinc-400 text-sm uppercase tracking-widest font-semibold mb-4">Available Formats</p>
+        <div class="formats-badge">
+          <span class="format-tag">PDF</span>
+          <span class="format-tag">CSV</span>
+          <span class="format-tag">Custom</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Formats Section -->
+  <section class="py-24 bg-vp-bg">
+    <div class="section-container">
+      <div class="mb-12 card-animation" style="animation-delay: 0.1s;">
+        <h2 class="heading-section mb-4">Supported Data Formats</h2>
+        <p class="text-zinc-400">
+          All deliverables are compatible with industry-standard CAD, GIS, and BIM platforms including AutoCAD, ArcGIS, Pix4D, DroneDeploy, and more.
+        </p>
+      </div>
+
+      <div class="format-grid card-animation" style="animation-delay: 0.2s;">
+        <div class="format-card">
+          <div class="format-extension">TIF</div>
+          <div class="format-description">Georeferenced raster format with spatial reference data</div>
+        </div>
+
+        <div class="format-card">
+          <div class="format-extension">LAS</div>
+          <div class="format-description">Standard point cloud format, uncompressed</div>
+        </div>
+
+        <div class="format-card">
+          <div class="format-extension">LAZ</div>
+          <div class="format-description">Compressed point cloud format, smaller file size</div>
+        </div>
+
+        <div class="format-card">
+          <div class="format-extension">XYZ</div>
+          <div class="format-description">ASCII point cloud format for universal compatibility</div>
+        </div>
+
+        <div class="format-card">
+          <div class="format-extension">OBJ</div>
+          <div class="format-description">3D mesh format for visualization and CAD import</div>
+        </div>
+
+        <div class="format-card">
+          <div class="format-extension">DXF</div>
+          <div class="format-description">AutoCAD drawing format for design integration</div>
+        </div>
+
+        <div class="format-card">
+          <div class="format-extension">DWG</div>
+          <div class="format-description">AutoCAD native format for professional workflows</div>
+        </div>
+
+        <div class="format-card">
+          <div class="format-extension">PDF</div>
+          <div class="format-description">Portable document format for reports and presentations</div>
+        </div>
+
+        <div class="format-card">
+          <div class="format-extension">3D PDF</div>
+          <div class="format-description">Interactive 3D models embedded in PDF documents</div>
+        </div>
+
+        <div class="format-card">
+          <div class="format-extension">CSV</div>
+          <div class="format-description">Spreadsheet format for data analysis and calculations</div>
+        </div>
+
+        <div class="format-card">
+          <div class="format-extension">JPEG</div>
+          <div class="format-description">Compressed image format for quick sharing and viewing</div>
+        </div>
+
+        <div class="format-card">
+          <div class="format-extension">MP4</div>
+          <div class="format-description">Video format for time-lapse and progress documentation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 bg-vp-surface border-l-4 border-amber-500">
+    <div class="section-container">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Left content -->
+        <div class="card-animation" style="animation-delay: 0.1s;">
+          <h2 class="heading-section mb-4">
+            Want to See Your Site's Data?
+          </h2>
+          <p class="text-zinc-400 mb-8">
+            Get a free consultation with our team to discuss your project requirements and learn how Vantage Point can deliver the precise aerial data you need.
+          </p>
+          <a href="/contact" class="btn-primary inline-block">
+            Get a Quote
+          </a>
+        </div>
+
+        <!-- Right stats -->
+        <div class="grid grid-cols-3 gap-6 card-animation" style="animation-delay: 0.2s;">
+          <div class="bg-vp-bg px-6 py-8 rounded-lg border border-zinc-800 text-center">
+            <p class="text-amber-500 text-2xl font-bold mb-2">±2cm</p>
+            <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold">RTK Accuracy</p>
+          </div>
+          <div class="bg-vp-bg px-6 py-8 rounded-lg border border-zinc-800 text-center">
+            <p class="text-amber-500 text-2xl font-bold mb-2">12+</p>
+            <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold">Data Formats</p>
+          </div>
+          <div class="bg-vp-bg px-6 py-8 rounded-lg border border-zinc-800 text-center">
+            <p class="text-amber-500 text-2xl font-bold mb-2">24hr</p>
+            <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold">Turnaround</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
