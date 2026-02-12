@@ -66,7 +66,11 @@ const description = 'Explore sample deliverables from Vantage Point drone aerial
     .placeholder-content {
       position: relative;
       z-index: 10;
-      flex flex-col items-center justify-center h-full;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
     }
 
     .placeholder-label {
@@ -199,37 +203,13 @@ const description = 'Explore sample deliverables from Vantage Point drone aerial
 
       <div class="gallery-grid card-animation" style="animation-delay: 0.2s;">
         <!-- Sample 1 -->
-        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
-          <div class="placeholder-content text-center">
-            <p class="placeholder-label">Orthomosaic Sample</p>
-            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-            </svg>
-            <p class="placeholder-sublabel">Georeferenced Map</p>
-          </div>
-        </div>
+<div class="aspect-video rounded-lg overflow-hidden"><img src="/images/hero/hero_Aerial_drone_shot.jpg" alt="Orthomosaic - Construction Site" class="w-full h-full object-cover" loading="lazy" /></div>
 
         <!-- Sample 2 -->
-        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
-          <div class="placeholder-content text-center">
-            <p class="placeholder-label">Orthomosaic Sample</p>
-            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-            </svg>
-            <p class="placeholder-sublabel">Composite View</p>
-          </div>
-        </div>
+<div class="aspect-video rounded-lg overflow-hidden"><img src="/images/hero/hero_Construction_site_overvie.jpg" alt="Orthomosaic - Solar Installation" class="w-full h-full object-cover" loading="lazy" /></div>
 
         <!-- Sample 3 -->
-        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
-          <div class="placeholder-content text-center">
-            <p class="placeholder-label">Orthomosaic Sample</p>
-            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-            </svg>
-            <p class="placeholder-sublabel">Site Overview</p>
-          </div>
-        </div>
+<div class="aspect-video rounded-lg overflow-hidden"><img src="/images/services/services_realestate_Residential_aerial.jpg" alt="Orthomosaic - Agricultural Land" class="w-full h-full object-cover" loading="lazy" /></div>
       </div>
 
       <!-- Captions -->
@@ -272,37 +252,13 @@ const description = 'Explore sample deliverables from Vantage Point drone aerial
 
       <div class="gallery-grid card-animation" style="animation-delay: 0.2s;">
         <!-- Sample 1 -->
-        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
-          <div class="placeholder-content text-center">
-            <p class="placeholder-label">Point Cloud Sample</p>
-            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-            </svg>
-            <p class="placeholder-sublabel">3D Model View</p>
-          </div>
-        </div>
+<div class="aspect-video rounded-lg overflow-hidden"><img src="/images/portfolio/portfolio_Detailed_site_analysis.jpg" alt="3D Point Cloud - Quarry Stockpile" class="w-full h-full object-cover" loading="lazy" /></div>
 
         <!-- Sample 2 -->
-        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
-          <div class="placeholder-content text-center">
-            <p class="placeholder-label">Point Cloud Sample</p>
-            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-            </svg>
-            <p class="placeholder-sublabel">Colorized Cloud</p>
-          </div>
-        </div>
+<div class="aspect-video rounded-lg overflow-hidden"><img src="/images/services/services_inspection_Building_inspection.jpg" alt="3D Point Cloud - Rooftop Survey" class="w-full h-full object-cover" loading="lazy" /></div>
 
         <!-- Sample 3 -->
-        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
-          <div class="placeholder-content text-center">
-            <p class="placeholder-label">Point Cloud Sample</p>
-            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-            </svg>
-            <p class="placeholder-sublabel">Mesh Surface</p>
-          </div>
-        </div>
+<div class="aspect-video rounded-lg overflow-hidden"><img src="/images/services/services_mapping_Digital_mapping_interface.jpg" alt="3D Point Cloud - Mine Pit Analysis" class="w-full h-full object-cover" loading="lazy" /></div>
       </div>
 
       <!-- Captions -->
@@ -348,15 +304,7 @@ const description = 'Explore sample deliverables from Vantage Point drone aerial
       <div class="card-animation flex flex-col md:flex-row items-center gap-6 mt-8" style="animation-delay: 0.2s;">
         <!-- Week 1 -->
         <div class="flex-1">
-          <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
-            <div class="placeholder-content text-center">
-              <p class="placeholder-label">Week 1</p>
-              <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
-              </svg>
-              <p class="placeholder-sublabel">Initial Baseline</p>
-            </div>
-          </div>
+  <div class="aspect-video rounded-lg overflow-hidden"><img src="/images/hero/hero_Building_construction_pro.jpg" alt="Progress Monitoring - Week 1 Baseline" class="w-full h-full object-cover" loading="lazy" /></div>
         </div>
 
         <!-- Arrow 1 -->
@@ -364,15 +312,7 @@ const description = 'Explore sample deliverables from Vantage Point drone aerial
 
         <!-- Week 4 -->
         <div class="flex-1">
-          <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
-            <div class="placeholder-content text-center">
-              <p class="placeholder-label">Week 4</p>
-              <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
-              </svg>
-              <p class="placeholder-sublabel">Mid-Project Check</p>
-            </div>
-          </div>
+  <div class="aspect-video rounded-lg overflow-hidden"><img src="/images/portfolio/portfolio_Before_After_comparison.jpg" alt="Progress Monitoring - Week 4 Mid-Project" class="w-full h-full object-cover" loading="lazy" /></div>
         </div>
 
         <!-- Arrow 2 -->
@@ -380,15 +320,7 @@ const description = 'Explore sample deliverables from Vantage Point drone aerial
 
         <!-- Week 8 -->
         <div class="flex-1">
-          <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
-            <div class="placeholder-content text-center">
-              <p class="placeholder-label">Week 8</p>
-              <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
-              </svg>
-              <p class="placeholder-sublabel">Final Status</p>
-            </div>
-          </div>
+  <div class="aspect-video rounded-lg overflow-hidden"><img src="/images/portfolio/portfolio_Project_completion_aerial.jpg" alt="Progress Monitoring - Week 8 Final" class="w-full h-full object-cover" loading="lazy" /></div>
         </div>
       </div>
 
@@ -422,37 +354,13 @@ const description = 'Explore sample deliverables from Vantage Point drone aerial
 
       <div class="gallery-grid card-animation" style="animation-delay: 0.2s;">
         <!-- Report 1 -->
-        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
-          <div class="placeholder-content text-center">
-            <p class="placeholder-label">Report Sample</p>
-            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-            </svg>
-            <p class="placeholder-sublabel">Volume Analysis</p>
-          </div>
-        </div>
+<div class="aspect-video rounded-lg overflow-hidden"><img src="/images/portfolio/portfolio_Deliverable_documentation.jpg" alt="Volume Analysis Report" class="w-full h-full object-cover" loading="lazy" /></div>
 
         <!-- Report 2 -->
-        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
-          <div class="placeholder-content text-center">
-            <p class="placeholder-label">Report Sample</p>
-            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-            </svg>
-            <p class="placeholder-sublabel">Thermal Analysis</p>
-          </div>
-        </div>
+<div class="aspect-video rounded-lg overflow-hidden"><img src="/images/portfolio/portfolio_Quality_assurance_report.jpg" alt="Thermal Analysis Report" class="w-full h-full object-cover" loading="lazy" /></div>
 
         <!-- Report 3 -->
-        <div class="gallery-placeholder aspect-video rounded-lg flex items-center justify-center">
-          <div class="placeholder-content text-center">
-            <p class="placeholder-label">Report Sample</p>
-            <svg class="w-8 h-8 text-amber-500/60 mx-auto my-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-            </svg>
-            <p class="placeholder-sublabel">NDVI Mapping</p>
-          </div>
-        </div>
+<div class="aspect-video rounded-lg overflow-hidden"><img src="/images/portfolio/portfolio_Report_generation.jpg" alt="NDVI Mapping Report" class="w-full h-full object-cover" loading="lazy" /></div>
       </div>
 
       <!-- Report Features -->

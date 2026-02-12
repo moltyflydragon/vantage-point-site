@@ -97,14 +97,17 @@ const description = 'Survey-grade aerial data capture for construction, solar, m
   </style>
 
   <!-- Hero Section -->
-  <section class="relative min-h-[calc(100vh-80px)] bg-vp-bg grid-overlay overflow-hidden flex items-center justify-center">
+  <section class="relative min-h-[calc(100vh-80px)] bg-vp-bg overflow-hidden flex items-center justify-center">
+    <!-- Hero background image -->
+    <div class="absolute inset-0">
+      <img src="/images/hero/drone-photo-real.jpg" alt="Aerial drone photography of construction site" class="w-full h-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-b from-vp-bg/80 via-vp-bg/60 to-vp-bg/90"></div>
+    </div>
+
     <!-- Animated decorative elements -->
     <div class="absolute top-20 left-10 w-2 h-2 bg-amber-500 rounded-full pulse-animation"></div>
     <div class="absolute top-32 right-20 w-3 h-3 bg-amber-500 rounded-full pulse-animation" style="animation-delay: 0.5s;"></div>
     <div class="absolute bottom-32 left-1/4 w-2 h-2 bg-amber-500 rounded-full pulse-animation" style="animation-delay: 1s;"></div>
-
-    <!-- Diagonal accent line -->
-    <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-500/10 to-transparent rounded-full blur-3xl diagonal-accent"></div>
 
     <!-- Hero content -->
     <div class="relative z-10 section-container text-center">
@@ -210,11 +213,8 @@ const description = 'Survey-grade aerial data capture for construction, solar, m
       <div class="grid md:grid-cols-3 gap-12">
         <!-- Orthomosaics -->
         <div>
-          <div class="mb-6 h-64 bg-zinc-800 border-2 border-dashed border-amber-500/50 rounded-lg flex items-center justify-center hover-glow">
-            <div class="text-center">
-              <p class="text-zinc-500 text-sm uppercase tracking-widest font-semibold">Orthomosaic Sample</p>
-              <p class="text-zinc-600 text-xs mt-2">Georeferenced aerial map</p>
-            </div>
+          <div class="mb-6 h-64 rounded-lg overflow-hidden hover-glow">
+            <img src="/images/hero/hero_Aerial_drone_shot.jpg" alt="Orthomosaic aerial map sample" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <h3 class="heading-card mb-3">Orthomosaics</h3>
           <p class="text-zinc-400 mb-6">Georeferenced aerial images stitched into seamless, accurate maps. Perfect for site planning, progress tracking, and analysis.</p>
@@ -225,11 +225,8 @@ const description = 'Survey-grade aerial data capture for construction, solar, m
 
         <!-- 3D Point Clouds -->
         <div>
-          <div class="mb-6 h-64 bg-zinc-800 border-2 border-dashed border-amber-500/50 rounded-lg flex items-center justify-center hover-glow">
-            <div class="text-center">
-              <p class="text-zinc-500 text-sm uppercase tracking-widest font-semibold">3D Point Cloud Sample</p>
-              <p class="text-zinc-600 text-xs mt-2">Survey-grade model</p>
-            </div>
+          <div class="mb-6 h-64 rounded-lg overflow-hidden hover-glow">
+            <img src="/images/services/services_mapping_Digital_mapping_interface.jpg" alt="3D point cloud survey model" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <h3 class="heading-card mb-3">3D Point Clouds</h3>
           <p class="text-zinc-400 mb-6">Survey-grade point cloud models with ±2cm accuracy. Use for volumetric calculations, design verification, and digital twins.</p>
@@ -240,11 +237,8 @@ const description = 'Survey-grade aerial data capture for construction, solar, m
 
         <!-- Progress Monitoring -->
         <div>
-          <div class="mb-6 h-64 bg-zinc-800 border-2 border-dashed border-amber-500/50 rounded-lg flex items-center justify-center hover-glow">
-            <div class="text-center">
-              <p class="text-zinc-500 text-sm uppercase tracking-widest font-semibold">Time-Series Analysis</p>
-              <p class="text-zinc-600 text-xs mt-2">Progress tracking</p>
-            </div>
+          <div class="mb-6 h-64 rounded-lg overflow-hidden hover-glow">
+            <img src="/images/services/services_construction_Site_survey_progress.jpg" alt="Construction progress monitoring time-series" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <h3 class="heading-card mb-3">Progress Monitoring</h3>
           <p class="text-zinc-400 mb-6">Repeatable flights capture progress over time. Compare datasets, track milestones, and verify completion with visual evidence.</p>
