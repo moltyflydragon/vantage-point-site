@@ -1,619 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vantage Point | RTK-Enabled Drone Aerial Data</title>
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Fonts - Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            vp: {
-              bg: '#09090b',
-              surface: '#18181b',
-              'surface-2': '#27272a',
-              accent: '#f59e0b',
-              'accent-hover': '#d97706',
-              text: '#fafafa',
-              muted: '#a1a1aa',
-              border: '#3f3f46'
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
-
-  <style>
-    * {
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      background-color: #09090b;
-      color: #fafafa;
-    }
-
-    /* Keyframe animations */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-
-    @keyframes pulse-ring {
-      0% {
-        box-shadow: 0 0 0 0 rgba(251, 146, 60, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 40px rgba(251, 146, 60, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(251, 146, 60, 0);
-      }
-    }
-
-    @keyframes slide-in-left {
-      from {
-        opacity: 0;
-        transform: translateX(-40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes slide-in-up {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fade-in {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes diagonal-shift {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(10px, -10px); }
-    }
-
-    /* Animation classes */
-    .float-animation {
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .pulse-animation {
-      animation: pulse-ring 2s infinite;
-    }
-
-    .slide-in-left-animation {
-      animation: slide-in-left 0.8s ease-out;
-    }
-
-    .slide-in-up-animation {
-      animation: slide-in-up 0.8s ease-out;
-    }
-
-    .fade-in-animation {
-      animation: fade-in 0.8s ease-out;
-    }
-
-    .diagonal-accent {
-      animation: diagonal-shift 4s ease-in-out infinite;
-    }
-
-    /* Grid overlay pattern */
-    .grid-overlay {
-      background-image:
-        linear-gradient(rgba(251, 146, 60, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(251, 146, 60, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-    }
-
-    /* Hover glow effect */
-    .hover-glow {
-      transition: all 0.3s ease;
-    }
-
-    .hover-glow:hover {
-      box-shadow: 0 0 30px rgba(251, 146, 60, 0.2);
-    }
-
-    /* Utility classes */
-    .section-container {
-      max-width: 80rem;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .heading-display {
-      font-size: 3.75rem;
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: #fafafa;
-    }
-
-    .heading-section {
-      font-size: 2.25rem;
-      font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      color: #fafafa;
-    }
-
-    .heading-card {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: #fafafa;
-    }
-
-    .card {
-      padding: 1.5rem;
-      background-color: #18181b;
-      border: 1px solid #3f3f46;
-      border-radius: 0.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-      display: inline-block;
-      padding: 0.875rem 2rem;
-      background-color: #f59e0b;
-      color: #09090b;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      font-size: 0.875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-
-    .btn-primary:hover {
-      background-color: #d97706;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
-    }
-
-    .btn-secondary {
-      display: inline-block;
-      padding: 0.875rem 2rem;
-      background-color: transparent;
-      color: #f59e0b;
-      border: 2px solid #f59e0b;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      font-size: 0.875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-
-    .btn-secondary:hover {
-      background-color: #f59e0b;
-      color: #09090b;
-      transform: translateY(-2px);
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .heading-display {
-        font-size: 2.25rem;
-      }
-
-      .heading-section {
-        font-size: 1.875rem;
-      }
-    }
-  </style>
-</head>
-<body>
-  <!-- Header -->
-  <header class="bg-vp-bg border-b border-zinc-800 sticky top-0 z-50">
-    <div class="section-container">
-      <div class="h-20 flex items-center justify-between">
-        <!-- Logo -->
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 bg-gradient-to-br from-amber-500 to-amber-600 rounded-lg flex items-center justify-center">
-            <span class="text-vp-bg font-bold text-lg">VP</span>
-          </div>
-          <span class="text-white font-bold text-lg">Vantage Point</span>
-        </div>
-
-        <!-- Navigation -->
-        <nav class="hidden md:flex gap-8">
-          <a href="index.html" class="text-amber-500 hover:text-amber-600 transition-colors text-sm font-medium">Home</a>
-          <a href="services.html" class="text-zinc-400 hover:text-amber-500 transition-colors text-sm">Services</a>
-          <a href="industries.html" class="text-zinc-400 hover:text-amber-500 transition-colors text-sm">Industries</a>
-          <a href="deliverables.html" class="text-zinc-400 hover:text-amber-500 transition-colors text-sm">Deliverables</a>
-          <a href="about.html" class="text-zinc-400 hover:text-amber-500 transition-colors text-sm">About</a>
-          <a href="contact.html" class="text-zinc-400 hover:text-amber-500 transition-colors text-sm">Contact</a>
-        </nav>
-
-        <!-- CTA Button -->
-        <button class="btn-primary text-xs">Get Quote</button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="relative min-h-[calc(100vh-80px)] bg-vp-bg grid-overlay overflow-hidden flex items-center justify-center">
-    <!-- Animated decorative elements -->
-    <div class="absolute top-20 left-10 w-2 h-2 bg-amber-500 rounded-full pulse-animation"></div>
-    <div class="absolute top-32 right-20 w-3 h-3 bg-amber-500 rounded-full pulse-animation" style="animation-delay: 0.5s;"></div>
-    <div class="absolute bottom-32 left-1/4 w-2 h-2 bg-amber-500 rounded-full pulse-animation" style="animation-delay: 1s;"></div>
-
-    <!-- Diagonal accent blur -->
-    <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-500 to-transparent opacity-10 rounded-full blur-3xl diagonal-accent"></div>
-
-    <!-- Hero content -->
-    <div class="relative z-10 section-container text-center py-20">
-      <div class="slide-in-left-animation mb-6">
-        <p class="text-amber-500 uppercase tracking-widest text-sm font-semibold">
-          RTK-Enabled Drone Data Capture
-        </p>
-      </div>
-
-      <h1 class="heading-display slide-in-up-animation mb-6">
-        Survey-Grade Aerial Data, On Your Timeline
-      </h1>
-
-      <p class="text-zinc-300 text-lg max-w-2xl mx-auto mb-12 slide-in-up-animation" style="animation-delay: 0.2s;">
-        Precision aerial data capture for construction, solar, mining, roofing, and agricultural projects. From site survey to progress monitoring—delivered fast, accurate, and cost-effective.
-      </p>
-
-      <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-20 slide-in-up-animation" style="animation-delay: 0.4s;">
-        <a href="contact.html" class="btn-primary">Get a Quote</a>
-        <a href="services.html" class="btn-secondary">View Services</a>
-      </div>
-
-      <!-- Trust badges -->
-      <div class="flex flex-wrap justify-center gap-6 fade-in-animation" style="animation-delay: 0.6s;">
-        <div class="px-6 py-3 bg-vp-surface border border-zinc-800 rounded-lg">
-          <span class="text-amber-500 font-bold text-lg">±2cm</span>
-          <p class="text-zinc-500 text-xs uppercase tracking-widest">Accuracy</p>
-        </div>
-        <div class="px-6 py-3 bg-vp-surface border border-zinc-800 rounded-lg">
-          <span class="text-amber-500 font-bold text-lg">Part 107</span>
-          <p class="text-zinc-500 text-xs uppercase tracking-widest">Licensed</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Key Benefits Section -->
-  <section class="py-24 bg-vp-bg">
-    <div class="section-container">
-      <h2 class="heading-section text-center mb-16">Why Choose Vantage Point</h2>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- RTK Precision Card -->
-        <div class="card hover-glow group">
-          <div class="mb-6 inline-block">
-            <svg class="w-12 h-12 text-amber-500 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
-            </svg>
-          </div>
-          <h3 class="heading-card mb-3">RTK Precision</h3>
-          <p class="text-zinc-400">Survey-grade accuracy down to ±2cm. Meets or exceeds ASPRS standards for professional surveying.</p>
-        </div>
-
-        <!-- Fast Turnaround Card -->
-        <div class="card hover-glow group">
-          <div class="mb-6 inline-block">
-            <svg class="w-12 h-12 text-amber-500 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M11.99 5V1h-8v4H3.99L4 19h16V9h-4V5h-4.01zm7 10h-5v4h5v-4zm-5-14h1v3h-1V1zm6 0h1v3h-1V1zM6.99 5h1v3h-1V5z"/>
-            </svg>
-          </div>
-          <h3 class="heading-card mb-3">Fast Turnaround</h3>
-          <p class="text-zinc-400">Data captured and processed on your schedule. Most projects delivered within 24-48 hours.</p>
-        </div>
-
-        <!-- Cost-Effective Card -->
-        <div class="card hover-glow group">
-          <div class="mb-6 inline-block">
-            <svg class="w-12 h-12 text-amber-500 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
-            </svg>
-          </div>
-          <h3 class="heading-card mb-3">Cost-Effective</h3>
-          <p class="text-zinc-400">Fraction of the cost of traditional survey crews. No expensive ground equipment or long project timelines.</p>
-        </div>
-
-        <!-- Zero Disruption Card -->
-        <div class="card hover-glow group">
-          <div class="mb-6 inline-block">
-            <svg class="w-12 h-12 text-amber-500 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-            </svg>
-          </div>
-          <h3 class="heading-card mb-3">Zero Disruption</h3>
-          <p class="text-zinc-400">Autonomous flight operations. No need to stop work on-site—we capture data while you stay productive.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- What We Deliver Section -->
-  <section class="py-24 bg-vp-surface">
-    <div class="section-container">
-      <h2 class="heading-section text-center mb-4">From Raw Flight Data to Actionable Intelligence</h2>
-      <p class="text-zinc-400 text-center max-w-2xl mx-auto mb-16">
-        We transform drone-captured data into survey-grade deliverables that drive decision-making across your projects.
-      </p>
-
-      <div class="grid md:grid-cols-3 gap-12">
-        <!-- Orthomosaics -->
-        <div>
-          <div class="mb-6 h-64 bg-zinc-800 border-2 border-dashed border-amber-500/50 rounded-lg flex items-center justify-center hover-glow">
-            <div class="text-center">
-              <p class="text-zinc-500 text-sm uppercase tracking-widest font-semibold">Orthomosaic Sample</p>
-              <p class="text-zinc-600 text-xs mt-2">Georeferenced aerial map</p>
-            </div>
-          </div>
-          <h3 class="heading-card mb-3">Orthomosaics</h3>
-          <p class="text-zinc-400 mb-6">Georeferenced aerial images stitched into seamless, accurate maps. Perfect for site planning, progress tracking, and analysis.</p>
-          <a href="deliverables.html" class="text-amber-500 hover:text-amber-600 font-semibold text-sm uppercase tracking-widest transition-colors">
-            Learn More →
-          </a>
-        </div>
-
-        <!-- 3D Point Clouds -->
-        <div>
-          <div class="mb-6 h-64 bg-zinc-800 border-2 border-dashed border-amber-500/50 rounded-lg flex items-center justify-center hover-glow">
-            <div class="text-center">
-              <p class="text-zinc-500 text-sm uppercase tracking-widest font-semibold">3D Point Cloud Sample</p>
-              <p class="text-zinc-600 text-xs mt-2">Survey-grade model</p>
-            </div>
-          </div>
-          <h3 class="heading-card mb-3">3D Point Clouds</h3>
-          <p class="text-zinc-400 mb-6">Survey-grade point cloud models with ±2cm accuracy. Use for volumetric calculations, design verification, and digital twins.</p>
-          <a href="deliverables.html" class="text-amber-500 hover:text-amber-600 font-semibold text-sm uppercase tracking-widest transition-colors">
-            Learn More →
-          </a>
-        </div>
-
-        <!-- Progress Monitoring -->
-        <div>
-          <div class="mb-6 h-64 bg-zinc-800 border-2 border-dashed border-amber-500/50 rounded-lg flex items-center justify-center hover-glow">
-            <div class="text-center">
-              <p class="text-zinc-500 text-sm uppercase tracking-widest font-semibold">Time-Series Analysis</p>
-              <p class="text-zinc-600 text-xs mt-2">Progress tracking</p>
-            </div>
-          </div>
-          <h3 class="heading-card mb-3">Progress Monitoring</h3>
-          <p class="text-zinc-400 mb-6">Repeatable flights capture progress over time. Compare datasets, track milestones, and verify completion with visual evidence.</p>
-          <a href="deliverables.html" class="text-amber-500 hover:text-amber-600 font-semibold text-sm uppercase tracking-widest transition-colors">
-            Learn More →
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Industries Served Section -->
-  <section class="py-24 bg-vp-bg">
-    <div class="section-container">
-      <!-- Divider line -->
-      <div class="flex justify-center mb-12">
-        <div class="w-12 h-1 bg-amber-500"></div>
-      </div>
-
-      <h2 class="heading-section text-center mb-16">Industries We Serve</h2>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Construction -->
-        <div class="card hover-glow hover:border-amber-500">
-          <h3 class="heading-card mb-2">Construction</h3>
-          <p class="text-zinc-400 text-sm mb-4">Site surveys, progress tracking, and as-built verification for large-scale projects.</p>
-          <a href="industries.html#construction" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors">
-            Explore →
-          </a>
-        </div>
-
-        <!-- Solar -->
-        <div class="card hover-glow hover:border-amber-500">
-          <h3 class="heading-card mb-2">Solar</h3>
-          <p class="text-zinc-400 text-sm mb-4">Roof analysis, design assessment, and system monitoring for solar installations.</p>
-          <a href="industries.html#solar" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors">
-            Explore →
-          </a>
-        </div>
-
-        <!-- Roofing -->
-        <div class="card hover-glow hover:border-amber-500">
-          <h3 class="heading-card mb-2">Roofing</h3>
-          <p class="text-zinc-400 text-sm mb-4">Damage assessment, pre-inspection, and project planning for commercial roofs.</p>
-          <a href="industries.html#roofing" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors">
-            Explore →
-          </a>
-        </div>
-
-        <!-- Agriculture -->
-        <div class="card hover-glow hover:border-amber-500">
-          <h3 class="heading-card mb-2">Agriculture</h3>
-          <p class="text-zinc-400 text-sm mb-4">Crop monitoring, land assessment, and precision agriculture data collection.</p>
-          <a href="industries.html#agriculture" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors">
-            Explore →
-          </a>
-        </div>
-
-        <!-- Mining -->
-        <div class="card hover-glow hover:border-amber-500">
-          <h3 class="heading-card mb-2">Mining</h3>
-          <p class="text-zinc-400 text-sm mb-4">Volume calculations, site mapping, and operational progress monitoring.</p>
-          <a href="industries.html#mining" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors">
-            Explore →
-          </a>
-        </div>
-
-        <!-- Insurance -->
-        <div class="card hover-glow hover:border-amber-500">
-          <h3 class="heading-card mb-2">Insurance</h3>
-          <p class="text-zinc-400 text-sm mb-4">Claims documentation, damage assessment, and loss adjustment support.</p>
-          <a href="industries.html#insurance" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors">
-            Explore →
-          </a>
-        </div>
-
-        <!-- Surveying -->
-        <div class="card hover-glow hover:border-amber-500">
-          <h3 class="heading-card mb-2">Surveying</h3>
-          <p class="text-zinc-400 text-sm mb-4">Professional boundary surveys and topographic mapping with survey-grade accuracy.</p>
-          <a href="industries.html#surveying" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors">
-            Explore →
-          </a>
-        </div>
-
-        <!-- Environmental -->
-        <div class="card hover-glow hover:border-amber-500">
-          <h3 class="heading-card mb-2">Environmental</h3>
-          <p class="text-zinc-400 text-sm mb-4">Environmental monitoring, restoration tracking, and habitat assessment.</p>
-          <a href="industries.html" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors">
-            Explore →
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Banner Section -->
-  <section class="py-20 bg-vp-surface border-l-4 border-amber-500 relative overflow-hidden">
-    <div class="section-container">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <!-- Left content -->
-        <div>
-          <h2 class="heading-section mb-4">
-            Ready to See Your Site from a New Perspective?
-          </h2>
-          <p class="text-zinc-400 mb-8">
-            Get a free consultation with our team to discuss your project requirements and learn how Vantage Point can deliver accurate aerial data on your timeline.
-          </p>
-          <a href="contact.html" class="btn-primary inline-block">
-            Request a Quote
-          </a>
-        </div>
-
-        <!-- Right stats -->
-        <div class="grid grid-cols-3 gap-6">
-          <div class="bg-vp-bg px-6 py-8 rounded-lg border border-zinc-800 text-center hover-glow">
-            <p class="text-amber-500 text-2xl font-bold mb-2">±2cm</p>
-            <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold">RTK Accuracy</p>
-          </div>
-          <div class="bg-vp-bg px-6 py-8 rounded-lg border border-zinc-800 text-center hover-glow">
-            <p class="text-amber-500 text-2xl font-bold mb-2">4K</p>
-            <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold">Resolution</p>
-          </div>
-          <div class="bg-vp-bg px-6 py-8 rounded-lg border border-zinc-800 text-center hover-glow">
-            <p class="text-amber-500 text-2xl font-bold mb-2">24hr</p>
-            <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold">Turnaround</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Stats/Trust Bar -->
-  <section class="py-8 bg-vp-bg border-t border-zinc-800">
-    <div class="section-container">
-      <div class="flex flex-wrap justify-center items-center gap-8 text-center md:text-left">
-        <div class="flex-1 min-w-max">
-          <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold">FAA Part 107 Licensed</p>
-        </div>
-        <div class="hidden md:block w-px h-6 bg-zinc-800"></div>
-        <div class="flex-1 min-w-max">
-          <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold">RTK-Enabled Technology</p>
-        </div>
-        <div class="hidden md:block w-px h-6 bg-zinc-800"></div>
-        <div class="flex-1 min-w-max">
-          <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold">Survey-Grade Accuracy</p>
-        </div>
-        <div class="hidden md:block w-px h-6 bg-zinc-800"></div>
-        <div class="flex-1 min-w-max">
-          <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold">Southern California</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-vp-surface border-t border-zinc-800 py-16">
-    <div class="section-container">
-      <div class="grid md:grid-cols-4 gap-8 mb-12">
-        <!-- Brand -->
-        <div>
-          <div class="flex items-center gap-2 mb-4">
-            <div class="w-8 h-8 bg-gradient-to-br from-amber-500 to-amber-600 rounded-lg flex items-center justify-center">
-              <span class="text-vp-bg font-bold text-lg">VP</span>
-            </div>
-            <span class="text-white font-bold">Vantage Point</span>
-          </div>
-          <p class="text-zinc-500 text-sm">Survey-grade aerial data for professionals.</p>
-        </div>
-
-        <!-- Services -->
-        <div>
-          <h4 class="text-white font-semibold mb-4">Services</h4>
-          <ul class="space-y-2 text-sm text-zinc-400">
-            <li><a href="services.html" class="hover:text-amber-500 transition-colors">Aerial Surveys</a></li>
-            <li><a href="services.html" class="hover:text-amber-500 transition-colors">Data Processing</a></li>
-            <li><a href="services.html" class="hover:text-amber-500 transition-colors">Progress Monitoring</a></li>
-            <li><a href="services.html" class="hover:text-amber-500 transition-colors">Custom Solutions</a></li>
-          </ul>
-        </div>
-
-        <!-- Industries -->
-        <div>
-          <h4 class="text-white font-semibold mb-4">Industries</h4>
-          <ul class="space-y-2 text-sm text-zinc-400">
-            <li><a href="industries.html" class="hover:text-amber-500 transition-colors">Construction</a></li>
-            <li><a href="industries.html" class="hover:text-amber-500 transition-colors">Solar</a></li>
-            <li><a href="industries.html" class="hover:text-amber-500 transition-colors">Mining</a></li>
-            <li><a href="industries.html" class="hover:text-amber-500 transition-colors">Agriculture</a></li>
-          </ul>
-        </div>
-
-        <!-- Contact -->
-        <div>
-          <h4 class="text-white font-semibold mb-4">Contact</h4>
-          <ul class="space-y-2 text-sm text-zinc-400">
-            <li><a href="mailto:info@vantagepoint.com" class="hover:text-amber-500 transition-colors">info@vantagepoint.com</a></li>
-            <li><a href="tel:+1234567890" class="hover:text-amber-500 transition-colors">+1 (234) 567-890</a></li>
-            <li><p>Southern California</p></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Bottom bar -->
-      <div class="border-t border-zinc-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-zinc-500">
-        <p>&copy; 2024 Vantage Point. All rights reserved.</p>
-        <div class="flex gap-6 mt-4 md:mt-0">
-          <a href="#" class="hover:text-amber-500 transition-colors">Privacy Policy</a>
-          <a href="#" class="hover:text-amber-500 transition-colors">Terms of Service</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Survey-grade aerial data capture for construction, solar, mining, and more. ±2cm accuracy, fast turnaround, FAA Part 107 licensed."><meta name="generator" content="Astro v4.16.19"><!-- Open Graph --><meta property="og:title" content="Vantage Point | RTK-Enabled Drone Aerial Data"><meta property="og:description" content="Survey-grade aerial data capture for construction, solar, mining, and more. ±2cm accuracy, fast turnaround, FAA Part 107 licensed."><meta property="og:type" content="website"><meta property="og:site_name" content="Vantage Point"><!-- Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title>Vantage Point | RTK-Enabled Drone Aerial Data</title><!-- Botpress Web Chat --><script src="https://files.bpcontent.cloud/2026/02/12/03/20260212032115-JF4HORWO.js" defer></script><link rel="stylesheet" href="/_astro/about.x5248y8G.css">
+<style>@keyframes float{0%,to{transform:translateY(0)}50%{transform:translateY(-20px)}}@keyframes pulse-ring{0%{box-shadow:0 0 #fb923cb3}70%{box-shadow:0 0 0 40px #fb923c00}to{box-shadow:0 0 #fb923c00}}@keyframes slide-in-left{0%{opacity:0;transform:translate(-40px)}to{opacity:1;transform:translate(0)}}@keyframes slide-in-up{0%{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}@keyframes fade-in{0%{opacity:0}to{opacity:1}}@keyframes diagonal-shift{0%,to{transform:translate(0)}50%{transform:translate(10px,-10px)}}.float-animation[data-astro-cid-j7pv25f6]{animation:float 6s ease-in-out infinite}.pulse-animation[data-astro-cid-j7pv25f6]{animation:pulse-ring 2s infinite}.slide-in-left-animation[data-astro-cid-j7pv25f6]{animation:slide-in-left .8s ease-out}.slide-in-up-animation[data-astro-cid-j7pv25f6]{animation:slide-in-up .8s ease-out}.fade-in-animation[data-astro-cid-j7pv25f6]{animation:fade-in .8s ease-out}.diagonal-accent[data-astro-cid-j7pv25f6]{animation:diagonal-shift 4s ease-in-out infinite}.grid-overlay[data-astro-cid-j7pv25f6]{background-image:linear-gradient(rgba(251,146,60,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(251,146,60,.03) 1px,transparent 1px);background-size:50px 50px}.hover-glow[data-astro-cid-j7pv25f6]{transition:all .3s ease}.hover-glow[data-astro-cid-j7pv25f6]:hover{box-shadow:0 0 30px #fb923c33}
+</style><script type="module" src="/_astro/hoisted.BbzIFhgT.js"></script></head> <body class="min-h-screen flex flex-col"> <header class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-vp-bg/80 backdrop-blur-xl"> <div class="section-container"> <nav class="flex items-center justify-between h-16 md:h-20"> <!-- Logo --> <a href="/" class="flex items-center gap-3 group"> <div class="relative"> <svg width="32" height="32" viewBox="0 0 32 32" class="text-amber-500"> <path d="M6 24L16 8l10 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> <circle cx="16" cy="12" r="2" fill="currentColor"></circle> </svg> </div> <div class="flex flex-col"> <span class="text-white font-black text-lg uppercase tracking-widest leading-none">
+Vantage Point
+</span> <span class="text-amber-500 text-[10px] uppercase tracking-[0.3em] font-semibold leading-none mt-0.5">
+Aerial Data
+</span> </div> </a> <!-- Desktop Nav --> <div class="hidden md:flex items-center gap-8"> <a href="/services" class="text-sm uppercase tracking-widest font-medium transition-colors duration-200 text-zinc-400 hover:text-white"> Services </a><a href="/deliverables" class="text-sm uppercase tracking-widest font-medium transition-colors duration-200 text-zinc-400 hover:text-white"> Deliverables </a><a href="/industries" class="text-sm uppercase tracking-widest font-medium transition-colors duration-200 text-zinc-400 hover:text-white"> Industries </a><a href="/about" class="text-sm uppercase tracking-widest font-medium transition-colors duration-200 text-zinc-400 hover:text-white"> About </a> <a href="/contact" class="btn-primary text-xs px-6 py-3">
+Get a Quote
+</a> </div> <!-- Mobile Menu Button --> <button id="mobile-menu-btn" class="md:hidden text-zinc-400 hover:text-white p-2" aria-label="Toggle menu"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <line x1="3" y1="6" x2="21" y2="6" class="menu-line"></line> <line x1="3" y1="12" x2="21" y2="12" class="menu-line"></line> <line x1="3" y1="18" x2="21" y2="18" class="menu-line"></line> </svg> </button> </nav> </div> <!-- Mobile Menu --> <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-800 bg-vp-bg/95 backdrop-blur-xl"> <div class="section-container py-6 flex flex-col gap-4"> <a href="/services" class="text-sm uppercase tracking-widest font-medium py-2 text-zinc-400"> Services </a><a href="/deliverables" class="text-sm uppercase tracking-widest font-medium py-2 text-zinc-400"> Deliverables </a><a href="/industries" class="text-sm uppercase tracking-widest font-medium py-2 text-zinc-400"> Industries </a><a href="/about" class="text-sm uppercase tracking-widest font-medium py-2 text-zinc-400"> About </a> <a href="/contact" class="btn-primary text-xs px-6 py-3 mt-2 text-center">
+Get a Quote
+</a> </div> </div> </header>  <main class="flex-1">    <section class="relative min-h-[calc(100vh-80px)] bg-vp-bg overflow-hidden flex items-center justify-center" data-astro-cid-j7pv25f6> <!-- Hero background image --> <div class="absolute inset-0" data-astro-cid-j7pv25f6> <img src="/images/hero/drone-photo-real.jpg" alt="Aerial drone photography of construction site" class="w-full h-full object-cover" loading="eager" data-astro-cid-j7pv25f6> <div class="absolute inset-0 bg-gradient-to-b from-vp-bg/80 via-vp-bg/60 to-vp-bg/90" data-astro-cid-j7pv25f6></div> </div> <!-- Animated decorative elements --> <div class="absolute top-20 left-10 w-2 h-2 bg-amber-500 rounded-full pulse-animation" data-astro-cid-j7pv25f6></div> <div class="absolute top-32 right-20 w-3 h-3 bg-amber-500 rounded-full pulse-animation" style="animation-delay: 0.5s;" data-astro-cid-j7pv25f6></div> <div class="absolute bottom-32 left-1/4 w-2 h-2 bg-amber-500 rounded-full pulse-animation" style="animation-delay: 1s;" data-astro-cid-j7pv25f6></div> <!-- Hero content --> <div class="relative z-10 section-container text-center" data-astro-cid-j7pv25f6> <div class="slide-in-left-animation" data-astro-cid-j7pv25f6> <p class="text-amber-500 uppercase tracking-widest text-sm font-semibold mb-6" data-astro-cid-j7pv25f6>
+RTK-Enabled Drone Data Capture
+</p> </div> <h1 class="heading-display slide-in-up-animation mb-6" data-astro-cid-j7pv25f6>
+Survey-Grade Aerial Data, On Your Timeline
+</h1> <p class="text-zinc-300 text-lg max-w-2xl mx-auto mb-12 slide-in-up-animation" style="animation-delay: 0.2s;" data-astro-cid-j7pv25f6>
+Precision aerial data capture for construction, solar, mining, roofing, and agricultural projects. From site survey to progress monitoring—delivered fast, accurate, and cost-effective.
+</p> <!-- CTA Buttons --> <div class="flex flex-col sm:flex-row gap-4 justify-center mb-20 slide-in-up-animation" style="animation-delay: 0.4s;" data-astro-cid-j7pv25f6> <a href="/contact" class="btn-primary" data-astro-cid-j7pv25f6>
+Get a Quote
+</a> <a href="/services" class="btn-secondary" data-astro-cid-j7pv25f6>
+View Services
+</a> </div> <!-- Trust badges --> <div class="flex flex-wrap justify-center gap-6 fade-in-animation" style="animation-delay: 0.6s;" data-astro-cid-j7pv25f6> <div class="px-6 py-3 bg-vp-surface border border-zinc-800 rounded-lg" data-astro-cid-j7pv25f6> <span class="text-amber-500 font-bold text-lg" data-astro-cid-j7pv25f6>±2cm</span> <p class="text-zinc-500 text-xs uppercase tracking-widest" data-astro-cid-j7pv25f6>Accuracy</p> </div> <div class="px-6 py-3 bg-vp-surface border border-zinc-800 rounded-lg" data-astro-cid-j7pv25f6> <span class="text-amber-500 font-bold text-lg" data-astro-cid-j7pv25f6>Part 107</span> <p class="text-zinc-500 text-xs uppercase tracking-widest" data-astro-cid-j7pv25f6>Licensed</p> </div> </div> </div> </section>  <section class="py-24 bg-vp-bg" data-astro-cid-j7pv25f6> <div class="section-container" data-astro-cid-j7pv25f6> <h2 class="heading-section text-center mb-16" data-astro-cid-j7pv25f6>Why Choose Vantage Point</h2> <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8" data-astro-cid-j7pv25f6> <!-- RTK Precision Card --> <div class="card hover-glow group" data-astro-cid-j7pv25f6> <div class="mb-6 inline-block" data-astro-cid-j7pv25f6> <svg class="w-12 h-12 text-amber-500 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24" data-astro-cid-j7pv25f6> <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" data-astro-cid-j7pv25f6></path> </svg> </div> <h3 class="heading-card mb-3" data-astro-cid-j7pv25f6>RTK Precision</h3> <p class="text-zinc-400" data-astro-cid-j7pv25f6>Survey-grade accuracy down to ±2cm. Meets or exceeds ASPRS standards for professional surveying.</p> </div> <!-- Fast Turnaround Card --> <div class="card hover-glow group" data-astro-cid-j7pv25f6> <div class="mb-6 inline-block" data-astro-cid-j7pv25f6> <svg class="w-12 h-12 text-amber-500 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24" data-astro-cid-j7pv25f6> <path d="M11.99 5V1h-8v4H3.99L4 19h16V9h-4V5h-4.01zm7 10h-5v4h5v-4zm-5-14h1v3h-1V1zm6 0h1v3h-1V1zM6.99 5h1v3h-1V5z" data-astro-cid-j7pv25f6></path> </svg> </div> <h3 class="heading-card mb-3" data-astro-cid-j7pv25f6>Fast Turnaround</h3> <p class="text-zinc-400" data-astro-cid-j7pv25f6>Data captured and processed on your schedule. Most projects delivered within 24-48 hours.</p> </div> <!-- Cost-Effective Card --> <div class="card hover-glow group" data-astro-cid-j7pv25f6> <div class="mb-6 inline-block" data-astro-cid-j7pv25f6> <svg class="w-12 h-12 text-amber-500 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24" data-astro-cid-j7pv25f6> <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" data-astro-cid-j7pv25f6></path> </svg> </div> <h3 class="heading-card mb-3" data-astro-cid-j7pv25f6>Cost-Effective</h3> <p class="text-zinc-400" data-astro-cid-j7pv25f6>Fraction of the cost of traditional survey crews. No expensive ground equipment or long project timelines.</p> </div> <!-- Zero Disruption Card --> <div class="card hover-glow group" data-astro-cid-j7pv25f6> <div class="mb-6 inline-block" data-astro-cid-j7pv25f6> <svg class="w-12 h-12 text-amber-500 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24" data-astro-cid-j7pv25f6> <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" data-astro-cid-j7pv25f6></path> </svg> </div> <h3 class="heading-card mb-3" data-astro-cid-j7pv25f6>Zero Disruption</h3> <p class="text-zinc-400" data-astro-cid-j7pv25f6>Autonomous flight operations. No need to stop work on-site—we capture data while you stay productive.</p> </div> </div> </div> </section>  <section class="py-24 bg-vp-surface" data-astro-cid-j7pv25f6> <div class="section-container" data-astro-cid-j7pv25f6> <h2 class="heading-section text-center mb-4" data-astro-cid-j7pv25f6>From Raw Flight Data to Actionable Intelligence</h2> <p class="text-zinc-400 text-center max-w-2xl mx-auto mb-16" data-astro-cid-j7pv25f6>
+We transform drone-captured data into survey-grade deliverables that drive decision-making across your projects.
+</p> <div class="grid md:grid-cols-3 gap-12" data-astro-cid-j7pv25f6> <!-- Orthomosaics --> <div data-astro-cid-j7pv25f6> <div class="mb-6 h-64 rounded-lg overflow-hidden hover-glow" data-astro-cid-j7pv25f6> <img src="/images/hero/hero_Aerial_drone_shot.jpg" alt="Orthomosaic aerial map sample" class="w-full h-full object-cover" loading="lazy" data-astro-cid-j7pv25f6> </div> <h3 class="heading-card mb-3" data-astro-cid-j7pv25f6>Orthomosaics</h3> <p class="text-zinc-400 mb-6" data-astro-cid-j7pv25f6>Georeferenced aerial images stitched into seamless, accurate maps. Perfect for site planning, progress tracking, and analysis.</p> <a href="/deliverables" class="text-amber-500 hover:text-amber-600 font-semibold text-sm uppercase tracking-widest transition-colors" data-astro-cid-j7pv25f6>
+Learn More →
+</a> </div> <!-- 3D Point Clouds --> <div data-astro-cid-j7pv25f6> <div class="mb-6 h-64 rounded-lg overflow-hidden hover-glow" data-astro-cid-j7pv25f6> <img src="/images/services/services_mapping_Digital_mapping_interface.jpg" alt="3D point cloud survey model" class="w-full h-full object-cover" loading="lazy" data-astro-cid-j7pv25f6> </div> <h3 class="heading-card mb-3" data-astro-cid-j7pv25f6>3D Point Clouds</h3> <p class="text-zinc-400 mb-6" data-astro-cid-j7pv25f6>Survey-grade point cloud models with ±2cm accuracy. Use for volumetric calculations, design verification, and digital twins.</p> <a href="/deliverables" class="text-amber-500 hover:text-amber-600 font-semibold text-sm uppercase tracking-widest transition-colors" data-astro-cid-j7pv25f6>
+Learn More →
+</a> </div> <!-- Progress Monitoring --> <div data-astro-cid-j7pv25f6> <div class="mb-6 h-64 rounded-lg overflow-hidden hover-glow" data-astro-cid-j7pv25f6> <img src="/images/services/services_construction_Site_survey_progress.jpg" alt="Construction progress monitoring time-series" class="w-full h-full object-cover" loading="lazy" data-astro-cid-j7pv25f6> </div> <h3 class="heading-card mb-3" data-astro-cid-j7pv25f6>Progress Monitoring</h3> <p class="text-zinc-400 mb-6" data-astro-cid-j7pv25f6>Repeatable flights capture progress over time. Compare datasets, track milestones, and verify completion with visual evidence.</p> <a href="/deliverables" class="text-amber-500 hover:text-amber-600 font-semibold text-sm uppercase tracking-widest transition-colors" data-astro-cid-j7pv25f6>
+Learn More →
+</a> </div> </div> </div> </section>  <section class="py-24 bg-vp-bg" data-astro-cid-j7pv25f6> <div class="section-container" data-astro-cid-j7pv25f6> <!-- Divider line --> <div class="flex justify-center mb-12" data-astro-cid-j7pv25f6> <div class="w-12 h-1 bg-amber-500" data-astro-cid-j7pv25f6></div> </div> <h2 class="heading-section text-center mb-16" data-astro-cid-j7pv25f6>Industries We Serve</h2> <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto pb-4" data-astro-cid-j7pv25f6> <!-- Construction --> <div class="card hover-glow hover:border-amber-500 min-w-full md:min-w-0" data-astro-cid-j7pv25f6> <h3 class="heading-card mb-2" data-astro-cid-j7pv25f6>Construction</h3> <p class="text-zinc-400 text-sm mb-4" data-astro-cid-j7pv25f6>Site surveys, progress tracking, and as-built verification for large-scale projects.</p> <a href="/industries" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors" data-astro-cid-j7pv25f6>
+Explore →
+</a> </div> <!-- Solar --> <div class="card hover-glow hover:border-amber-500 min-w-full md:min-w-0" data-astro-cid-j7pv25f6> <h3 class="heading-card mb-2" data-astro-cid-j7pv25f6>Solar</h3> <p class="text-zinc-400 text-sm mb-4" data-astro-cid-j7pv25f6>Roof analysis, design assessment, and system monitoring for solar installations.</p> <a href="/industries" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors" data-astro-cid-j7pv25f6>
+Explore →
+</a> </div> <!-- Roofing --> <div class="card hover-glow hover:border-amber-500 min-w-full md:min-w-0" data-astro-cid-j7pv25f6> <h3 class="heading-card mb-2" data-astro-cid-j7pv25f6>Roofing</h3> <p class="text-zinc-400 text-sm mb-4" data-astro-cid-j7pv25f6>Damage assessment, pre-inspection, and project planning for commercial roofs.</p> <a href="/industries" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors" data-astro-cid-j7pv25f6>
+Explore →
+</a> </div> <!-- Agriculture --> <div class="card hover-glow hover:border-amber-500 min-w-full md:min-w-0" data-astro-cid-j7pv25f6> <h3 class="heading-card mb-2" data-astro-cid-j7pv25f6>Agriculture</h3> <p class="text-zinc-400 text-sm mb-4" data-astro-cid-j7pv25f6>Crop monitoring, land assessment, and precision agriculture data collection.</p> <a href="/industries" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors" data-astro-cid-j7pv25f6>
+Explore →
+</a> </div> <!-- Mining --> <div class="card hover-glow hover:border-amber-500 min-w-full md:min-w-0" data-astro-cid-j7pv25f6> <h3 class="heading-card mb-2" data-astro-cid-j7pv25f6>Mining</h3> <p class="text-zinc-400 text-sm mb-4" data-astro-cid-j7pv25f6>Volume calculations, site mapping, and operational progress monitoring.</p> <a href="/industries" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors" data-astro-cid-j7pv25f6>
+Explore →
+</a> </div> <!-- Insurance --> <div class="card hover-glow hover:border-amber-500 min-w-full md:min-w-0" data-astro-cid-j7pv25f6> <h3 class="heading-card mb-2" data-astro-cid-j7pv25f6>Insurance</h3> <p class="text-zinc-400 text-sm mb-4" data-astro-cid-j7pv25f6>Claims documentation, damage assessment, and loss adjustment support.</p> <a href="/industries" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors" data-astro-cid-j7pv25f6>
+Explore →
+</a> </div> <!-- Surveying --> <div class="card hover-glow hover:border-amber-500 min-w-full md:min-w-0" data-astro-cid-j7pv25f6> <h3 class="heading-card mb-2" data-astro-cid-j7pv25f6>Surveying</h3> <p class="text-zinc-400 text-sm mb-4" data-astro-cid-j7pv25f6>Professional boundary surveys and topographic mapping with survey-grade accuracy.</p> <a href="/industries" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors" data-astro-cid-j7pv25f6>
+Explore →
+</a> </div> <!-- Environmental --> <div class="card hover-glow hover:border-amber-500 min-w-full md:min-w-0" data-astro-cid-j7pv25f6> <h3 class="heading-card mb-2" data-astro-cid-j7pv25f6>Environmental</h3> <p class="text-zinc-400 text-sm mb-4" data-astro-cid-j7pv25f6>Environmental monitoring, restoration tracking, and habitat assessment.</p> <a href="/industries" class="text-amber-500 hover:text-amber-600 text-sm font-semibold uppercase tracking-widest transition-colors" data-astro-cid-j7pv25f6>
+Explore →
+</a> </div> </div> </div> </section>  <section class="py-20 bg-vp-surface border-l-4 border-amber-500 relative overflow-hidden" data-astro-cid-j7pv25f6> <div class="section-container" data-astro-cid-j7pv25f6> <div class="grid md:grid-cols-2 gap-12 items-center" data-astro-cid-j7pv25f6> <!-- Left content --> <div data-astro-cid-j7pv25f6> <h2 class="heading-section mb-4" data-astro-cid-j7pv25f6>
+Ready to See Your Site from a New Perspective?
+</h2> <p class="text-zinc-400 mb-8" data-astro-cid-j7pv25f6>
+Get a free consultation with our team to discuss your project requirements and learn how Vantage Point can deliver accurate aerial data on your timeline.
+</p> <a href="/contact" class="btn-primary inline-block" data-astro-cid-j7pv25f6>
+Request a Quote
+</a> </div> <!-- Right stats --> <div class="grid grid-cols-3 gap-6" data-astro-cid-j7pv25f6> <div class="bg-vp-bg px-6 py-8 rounded-lg border border-zinc-800 text-center hover-glow" data-astro-cid-j7pv25f6> <p class="text-amber-500 text-2xl font-bold mb-2" data-astro-cid-j7pv25f6>±2cm</p> <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold" data-astro-cid-j7pv25f6>RTK Accuracy</p> </div> <div class="bg-vp-bg px-6 py-8 rounded-lg border border-zinc-800 text-center hover-glow" data-astro-cid-j7pv25f6> <p class="text-amber-500 text-2xl font-bold mb-2" data-astro-cid-j7pv25f6>4K</p> <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold" data-astro-cid-j7pv25f6>Resolution</p> </div> <div class="bg-vp-bg px-6 py-8 rounded-lg border border-zinc-800 text-center hover-glow" data-astro-cid-j7pv25f6> <p class="text-amber-500 text-2xl font-bold mb-2" data-astro-cid-j7pv25f6>24hr</p> <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold" data-astro-cid-j7pv25f6>Turnaround</p> </div> </div> </div> </div> </section>  <section class="py-8 bg-vp-bg border-t border-zinc-800" data-astro-cid-j7pv25f6> <div class="section-container" data-astro-cid-j7pv25f6> <div class="flex flex-wrap justify-center items-center gap-8 text-center md:text-left" data-astro-cid-j7pv25f6> <div class="flex-1 min-w-max" data-astro-cid-j7pv25f6> <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold" data-astro-cid-j7pv25f6>FAA Part 107 Licensed</p> </div> <div class="hidden md:block w-px h-6 bg-zinc-800" data-astro-cid-j7pv25f6></div> <div class="flex-1 min-w-max" data-astro-cid-j7pv25f6> <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold" data-astro-cid-j7pv25f6>RTK-Enabled Technology</p> </div> <div class="hidden md:block w-px h-6 bg-zinc-800" data-astro-cid-j7pv25f6></div> <div class="flex-1 min-w-max" data-astro-cid-j7pv25f6> <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold" data-astro-cid-j7pv25f6>Survey-Grade Accuracy</p> </div> <div class="hidden md:block w-px h-6 bg-zinc-800" data-astro-cid-j7pv25f6></div> <div class="flex-1 min-w-max" data-astro-cid-j7pv25f6> <p class="text-zinc-500 text-xs uppercase tracking-widest font-semibold" data-astro-cid-j7pv25f6>Southern California</p> </div> </div> </div> </section>  </main> <footer class="border-t border-zinc-800 bg-vp-bg"> <div class="section-container py-16"> <div class="grid grid-cols-1 md:grid-cols-4 gap-12"> <!-- Brand --> <div class="md:col-span-1"> <a href="/" class="flex items-center gap-3 mb-4"> <svg width="28" height="28" viewBox="0 0 32 32" class="text-amber-500"> <path d="M6 24L16 8l10 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> <circle cx="16" cy="12" r="2" fill="currentColor"></circle> </svg> <span class="text-white font-black text-base uppercase tracking-widest">
+Vantage Point
+</span> </a> <p class="text-zinc-500 text-sm leading-relaxed">
+Survey-grade aerial data capture for construction, solar, roofing, and
+          more. Serving Southern California.
+</p> </div> <!-- Services --> <div> <h4 class="text-xs uppercase tracking-widest text-zinc-400 font-semibold mb-4">
+Services
+</h4> <ul class="space-y-2"> <li> <a href="/services" class="text-sm text-zinc-500 hover:text-amber-500 transition-colors">
+Orthomosaics
+</a> </li> <li> <a href="/services" class="text-sm text-zinc-500 hover:text-amber-500 transition-colors">
+3D Point Clouds
+</a> </li> <li> <a href="/services" class="text-sm text-zinc-500 hover:text-amber-500 transition-colors">
+Progress Monitoring
+</a> </li> <li> <a href="/services" class="text-sm text-zinc-500 hover:text-amber-500 transition-colors">
+Thermal Mapping
+</a> </li> <li> <a href="/services" class="text-sm text-zinc-500 hover:text-amber-500 transition-colors">
+Volumetric Surveys
+</a> </li> </ul> </div> <!-- Industries --> <div> <h4 class="text-xs uppercase tracking-widest text-zinc-400 font-semibold mb-4">
+Industries
+</h4> <ul class="space-y-2"> <li> <a href="/industries" class="text-sm text-zinc-500 hover:text-amber-500 transition-colors">
+Construction
+</a> </li> <li> <a href="/industries" class="text-sm text-zinc-500 hover:text-amber-500 transition-colors">
+Solar Energy
+</a> </li> <li> <a href="/industries" class="text-sm text-zinc-500 hover:text-amber-500 transition-colors">
+Roofing
+</a> </li> <li> <a href="/industries" class="text-sm text-zinc-500 hover:text-amber-500 transition-colors">
+Agriculture
+</a> </li> <li> <a href="/industries" class="text-sm text-zinc-500 hover:text-amber-500 transition-colors">
+Mining & Aggregates
+</a> </li> </ul> </div> <!-- Contact --> <div> <h4 class="text-xs uppercase tracking-widest text-zinc-400 font-semibold mb-4">
+Contact
+</h4> <ul class="space-y-2"> <li> <a href="/contact" class="text-sm text-zinc-500 hover:text-amber-500 transition-colors">
+Get a Quote
+</a> </li> <li> <span class="text-sm text-zinc-500">Southern California</span> </li> <li> <span class="text-sm text-zinc-500">FAA Part 107 Licensed</span> </li> </ul> <div class="flex gap-4 mt-6"> <a href="#" class="text-zinc-600 hover:text-amber-500 transition-colors" aria-label="Instagram"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <rect x="2" y="2" width="20" height="20" rx="5"></rect> <circle cx="12" cy="12" r="5"></circle> <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"></circle> </svg> </a> <a href="#" class="text-zinc-600 hover:text-amber-500 transition-colors" aria-label="LinkedIn"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"></path> <rect x="2" y="9" width="4" height="12"></rect> <circle cx="4" cy="4" r="2"></circle> </svg> </a> <a href="#" class="text-zinc-600 hover:text-amber-500 transition-colors" aria-label="YouTube"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"></path> <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon> </svg> </a> </div> </div> </div> <!-- Bottom bar --> <div class="mt-12 pt-8 border-t border-zinc-800/50 flex flex-col md:flex-row justify-between items-center gap-4"> <p class="text-xs text-zinc-600">
+&copy; 2026 Vantage Point Aerial Data. All rights reserved.
+</p> <p class="text-xs text-zinc-600">
+FAA Part 107 Certified &middot; RTK-Enabled &middot; Southern
+        California
+</p> </div> </div> </footer> </body></html>
