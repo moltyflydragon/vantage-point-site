@@ -15,7 +15,7 @@ import Layout from '../layouts/Layout.astro';
         Aerial Data for Every Sector
       </h1>
       <p class="text-zinc-300 text-lg max-w-2xl leading-relaxed">
-        We serve diverse industries with precision drone data solutions. From construction to agriculture, our aerial insights help you make better decisions, faster.
+        We serve diverse industries with precision drone data solutions. From construction to solar energy, our aerial insights help you make better decisions, faster.
       </p>
     </div>
   </section>
@@ -62,9 +62,11 @@ import Layout from '../layouts/Layout.astro';
           </a>
         </div>
 
-        <!-- Industry Image -->
-        <div class="h-96 rounded-lg overflow-hidden">
-          <img src="/images/industries/construction-site-aerial.jpg" alt="Aerial view of active construction site with cranes and steel framework" class="w-full h-full object-cover" loading="lazy" />
+        <!-- Industry Video -->
+        <div class="h-96 rounded-lg overflow-hidden relative">
+          <video autoplay muted loop playsinline class="w-full h-full object-cover">
+            <source src="/videos/construction-aerial.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
     </div>
@@ -74,9 +76,11 @@ import Layout from '../layouts/Layout.astro';
   <section id="solar" class="py-20 border-t border-zinc-800">
     <div class="section-container">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <!-- Placeholder Image -->
-        <div class="h-96 rounded-lg overflow-hidden order-2 lg:order-1">
-          <img src="/images/industries/solar-commercial-building.jpg" alt="Aerial drone view of commercial solar panel installation in Southern California" class="w-full h-full object-cover" loading="lazy" />
+        <!-- Industry Video -->
+        <div class="h-96 rounded-lg overflow-hidden order-2 lg:order-1 relative">
+          <video autoplay muted loop playsinline class="w-full h-full object-cover">
+            <source src="/videos/solar-aerial.mp4" type="video/mp4" />
+          </video>
         </div>
 
         <!-- Text Content -->
@@ -162,109 +166,11 @@ import Layout from '../layouts/Layout.astro';
           </a>
         </div>
 
-        <!-- Industry Image -->
-        <div class="h-96 rounded-lg overflow-hidden">
-          <img src="/images/industries/solar-thermal-overlay.jpg" alt="Thermal infrared imaging overlay on building rooftop showing temperature distribution" class="w-full h-full object-cover" loading="lazy" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Agriculture -->
-  <section id="agriculture" class="py-20 border-t border-zinc-800">
-    <div class="section-container">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <!-- Placeholder Image -->
-        <div class="h-96 rounded-lg overflow-hidden order-2 lg:order-1">
-          <img src="/images/industries/construction-highway-aerial.jpg" alt="Aerial view of agricultural land and field development" class="w-full h-full object-cover" loading="lazy" />
-        </div>
-
-        <!-- Text Content -->
-        <div class="order-1 lg:order-2">
-          <h2 class="heading-section text-white mb-2">Agriculture</h2>
-          <p class="text-amber-500 text-sm font-semibold mb-6">Who uses it</p>
-          <p class="text-zinc-300 mb-8">Farm operators, agricultural consultants, precision ag specialists</p>
-
-          <div class="mb-8">
-            <p class="text-zinc-300 text-sm font-semibold mb-3">Use Cases</p>
-            <ul class="space-y-3">
-              <li class="flex items-start gap-3">
-                <span class="text-amber-500 mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
-                <span class="text-zinc-400">NDVI crop health mapping and vegetation analysis</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-amber-500 mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
-                <span class="text-zinc-400">Multispectral and thermal imagery for crop monitoring</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-amber-500 mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
-                <span class="text-zinc-400">Drainage and irrigation planning from aerial perspective</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-amber-500 mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
-                <span class="text-zinc-400">Field boundary mapping and area calculations</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="bg-vp-surface border border-amber-500/20 rounded-lg p-6 mb-8">
-            <p class="text-white font-semibold mb-2">Key Benefit</p>
-            <p class="text-zinc-300 text-sm">Make data-driven crop management decisions based on aerial intelligence</p>
-          </div>
-
-          <a href="/contact" class="btn-primary inline-block">
-            Get a Quote for Agriculture
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mining & Aggregates -->
-  <section id="mining" class="py-20 border-t border-zinc-800">
-    <div class="section-container">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <!-- Text Content -->
-        <div>
-          <h2 class="heading-section text-white mb-2">Mining & Aggregates</h2>
-          <p class="text-amber-500 text-sm font-semibold mb-6">Who uses it</p>
-          <p class="text-zinc-300 mb-8">Quarry operators, mine managers, aggregate producers</p>
-
-          <div class="mb-8">
-            <p class="text-zinc-300 text-sm font-semibold mb-3">Use Cases</p>
-            <ul class="space-y-3">
-              <li class="flex items-start gap-3">
-                <span class="text-amber-500 mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
-                <span class="text-zinc-400">Volumetric surveys and stockpile calculations</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-amber-500 mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
-                <span class="text-zinc-400">High-precision site mapping and monitoring</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-amber-500 mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
-                <span class="text-zinc-400">Inventory tracking and material management</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-amber-500 mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
-                <span class="text-zinc-400">Regulatory compliance documentation</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="bg-vp-surface border border-amber-500/20 rounded-lg p-6 mb-8">
-            <p class="text-white font-semibold mb-2">Key Benefit</p>
-            <p class="text-zinc-300 text-sm">Get accurate volumetric data without halting operations or manual surveys</p>
-          </div>
-
-          <a href="/contact" class="btn-primary inline-block">
-            Get a Quote for Mining & Aggregates
-          </a>
-        </div>
-
-        <!-- Industry Image -->
-        <div class="h-96 rounded-lg overflow-hidden">
-          <img src="/images/industries/construction-road-aerial.jpg" alt="Aerial view of excavation site with heavy equipment and earthwork operations" class="w-full h-full object-cover" loading="lazy" />
+        <!-- Industry Video - Thermal Inspection -->
+        <div class="h-96 rounded-lg overflow-hidden relative">
+          <video autoplay muted loop playsinline class="w-full h-full object-cover">
+            <source src="/videos/thermal-infrared.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
     </div>
@@ -274,9 +180,11 @@ import Layout from '../layouts/Layout.astro';
   <section id="insurance" class="py-20 border-t border-zinc-800">
     <div class="section-container">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <!-- Placeholder Image -->
-        <div class="h-96 rounded-lg overflow-hidden order-2 lg:order-1">
-          <img src="/images/industries/solar-carport-parking.jpg" alt="Aerial documentation of commercial property with solar carport structures" class="w-full h-full object-cover" loading="lazy" />
+        <!-- Industry Video -->
+        <div class="h-96 rounded-lg overflow-hidden order-2 lg:order-1 relative">
+          <video autoplay muted loop playsinline class="w-full h-full object-cover">
+            <source src="/videos/construction-excavator.mp4" type="video/mp4" />
+          </video>
         </div>
 
         <!-- Text Content -->
@@ -371,7 +279,7 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- Industry Image -->
         <div class="h-96 rounded-lg overflow-hidden">
-          <img src="/images/industries/solar-station-aerial.jpg" alt="Aerial survey of large-scale solar installation site" class="w-full h-full object-cover" loading="lazy" />
+          <img src="/images/industries/solar-carport-lot.jpg" alt="Aerial survey view of commercial property with detailed ground-level mapping" class="w-full h-full object-cover" loading="lazy" />
         </div>
       </div>
     </div>
