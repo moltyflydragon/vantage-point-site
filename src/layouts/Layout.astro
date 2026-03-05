@@ -41,8 +41,8 @@ const {
     <title>{title}</title>
 
     <!-- Botpress Web Chat -->
-    <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
-    <script src="https://files.bpcontent.cloud/2026/02/12/03/20260212032115-JF4HORWO.js" defer></script>
+    <script is:inline src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+    <script is:inline src="https://files.bpcontent.cloud/2026/02/12/03/20260212032115-JF4HORWO.js" defer></script>
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
@@ -50,5 +50,6 @@ const {
       <slot />
     </main>
     <Footer />
+    <div id="bp-embedded-webchat"></div>
   </body>
 </html>
