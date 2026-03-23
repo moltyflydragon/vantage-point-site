@@ -1,0 +1,184 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Work | Vantage Point" description="Real inspection work: thermal solar inspection for Kaiser Permanente and aerial industrial survey in Santa Barbara. See what we deliver.">
+  <!-- Page Hero -->
+  <section class="pt-40 pb-20 bg-vp-bg">
+    <div class="section-container">
+      <div class="mb-6">
+        <span class="text-amber-500 text-sm uppercase tracking-widest font-semibold">Our Work</span>
+      </div>
+      <h1 class="heading-display text-5xl md:text-6xl mb-6 text-white">Real Inspections.<br/>Real Results.</h1>
+      <p class="text-xl text-zinc-300 max-w-2xl leading-relaxed">
+        Every image on this page is from actual client work — not stock photos, not mockups. This is what we do.
+      </p>
+    </div>
+  </section>
+
+  <!-- Case Study 1: Kaiser Permanente Solar -->
+  <section class="py-24 bg-vp-surface">
+    <div class="section-container">
+      <div class="mb-12">
+        <span class="text-amber-500 text-xs uppercase tracking-widest font-semibold">Case Study</span>
+        <h2 class="heading-section mt-2">Commercial Solar Thermal Inspection</h2>
+        <p class="text-zinc-400 mt-2">Kaiser Permanente — Rooftop Solar Carport Array</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 mb-16">
+        <div class="space-y-6">
+          <p class="text-zinc-300 leading-relaxed">
+            Multi-building commercial solar carport installation at a Kaiser Permanente facility. The array covers multiple parking structures and ground-level carports — hundreds of panels across a large campus footprint.
+          </p>
+          <p class="text-zinc-400 leading-relaxed">
+            We flew the full installation with thermal and RGB sensors, capturing every panel from above. The thermal data revealed temperature anomalies invisible from ground level, including hotspots on individual cells and modules running outside normal operating range.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 pt-4">
+            <div class="bg-vp-bg rounded-lg p-4 border border-zinc-800">
+              <p class="text-amber-500 font-bold text-lg">Multi-Building</p>
+              <p class="text-zinc-500 text-xs uppercase tracking-wider">Campus Coverage</p>
+            </div>
+            <div class="bg-vp-bg rounded-lg p-4 border border-zinc-800">
+              <p class="text-amber-500 font-bold text-lg">Thermal + RGB</p>
+              <p class="text-zinc-500 text-xs uppercase tracking-wider">Dual Sensor</p>
+            </div>
+            <div class="bg-vp-bg rounded-lg p-4 border border-zinc-800">
+              <p class="text-amber-500 font-bold text-lg">Half Day</p>
+              <p class="text-zinc-500 text-xs uppercase tracking-wider">On Site</p>
+            </div>
+            <div class="bg-vp-bg rounded-lg p-4 border border-zinc-800">
+              <p class="text-amber-500 font-bold text-lg">Full Report</p>
+              <p class="text-zinc-500 text-xs uppercase tracking-wider">Delivered</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured image -->
+        <div class="rounded-lg overflow-hidden">
+          <img src="/images/solar-rgb/carport-aerial.jpg" alt="Aerial view of Kaiser Permanente solar carport array covering parking structure" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Image Grid: RGB -->
+      <div class="mb-8">
+        <h3 class="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-4">Aerial RGB</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/solar-rgb/carport-wide.jpg" alt="Wide angle aerial of solar carport array" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/solar-rgb/carport-structure.jpg" alt="Solar panels on parking structure rooftop" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/solar-rgb/panels-building.jpg" alt="Solar carport adjacent to building" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/solar-rgb/panels-parking.jpg" alt="Solar panels over parking spaces" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Grid: Thermal -->
+      <div class="mb-8">
+        <h3 class="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-4">Thermal Imaging</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/solar-thermal/carport-thermal.jpg" alt="Thermal scan of solar carport showing temperature patterns" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/solar-thermal/array-thermal.jpg" alt="Thermal aerial showing heat signatures across solar array" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/solar-thermal/rooftop-thermal.jpg" alt="Rooftop thermal scan revealing panel anomalies" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/solar-thermal/hotspot-detail.png" alt="Close-up thermal showing individual cell hotspots" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Thermal overlay highlight -->
+      <div>
+        <h3 class="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-4">Thermal + RGB Overlay</h3>
+        <div class="rounded-lg overflow-hidden max-w-2xl">
+          <img src="/images/solar-thermal/thermal-overlay.jpg" alt="Thermal data overlaid on visible-light aerial photo showing defect locations" class="w-full h-auto" loading="lazy" />
+          <p class="text-zinc-500 text-xs mt-3">Thermal data overlaid on visible-light imagery — defects mapped directly to physical panel locations</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study 2: Santa Barbara Oil -->
+  <section class="py-24 bg-vp-bg">
+    <div class="section-container">
+      <div class="mb-12">
+        <span class="text-amber-500 text-xs uppercase tracking-widest font-semibold">Case Study</span>
+        <h2 class="heading-section mt-2">Industrial Aerial Survey</h2>
+        <p class="text-zinc-400 mt-2">Oil & Gas Facility — Santa Barbara County</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 mb-16">
+        <div class="space-y-6">
+          <p class="text-zinc-300 leading-relaxed">
+            Aerial inspection of an active oil and gas facility including pipeline corridors, storage tanks, and supporting infrastructure. Both thermal and RGB sensors were used to document the site and identify potential maintenance concerns.
+          </p>
+          <p class="text-zinc-400 leading-relaxed">
+            Thermal imaging revealed temperature differentials along pipeline runs and at connection points. High-resolution aerial photography provided complete visual documentation of the facility for asset management and planning purposes.
+          </p>
+
+          <div class="pt-4 border-l-2 border-amber-500 pl-6">
+            <p class="text-zinc-400 text-sm italic">
+              We also inspect industrial infrastructure — pipelines, storage tanks, substations, and other assets where thermal imaging reveals problems invisible to the eye.
+            </p>
+          </div>
+        </div>
+
+        <div class="rounded-lg overflow-hidden">
+          <img src="/images/oil-rgb/facility-wide.jpg" alt="Aerial view of oil and gas facility with storage tanks and pipeline infrastructure" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Image Grid -->
+      <div class="mb-8">
+        <h3 class="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-4">Aerial Documentation</h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/oil-rgb/pipeline-aerial.jpg" alt="Aerial view of pipeline corridor and circular storage tank" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/oil-rgb/pipeline-hillside.jpg" alt="Pipeline running through green hillside terrain" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/oil-rgb/storage-tank.jpg" alt="Large industrial storage tank viewed from above" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-4">Thermal Imaging</h3>
+        <div class="grid grid-cols-2 gap-4 max-w-2xl">
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/oil-thermal/pipeline-thermal.jpg" alt="Thermal image of pipeline and surrounding terrain" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+          <div class="rounded-lg overflow-hidden aspect-square">
+            <img src="/images/oil-thermal/pipeline-thermal-2.jpg" alt="Thermal scan showing heat signatures along pipeline" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 bg-vp-surface border-t border-zinc-800">
+    <div class="section-container max-w-2xl mx-auto text-center">
+      <h2 class="heading-section mb-6">Schedule an Inspection</h2>
+      <p class="text-lg text-zinc-300 mb-8">
+        Interested in a thermal assessment for your installation? We'd be happy to discuss your site and scope an inspection.
+      </p>
+      <a href="/contact" class="btn-primary inline-block">
+        Schedule an Inspection
+      </a>
+    </div>
+  </section>
+</Layout>
